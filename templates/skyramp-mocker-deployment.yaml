@@ -28,6 +28,12 @@ spec:
         - name: {{ .Chart.Name }}
           configMap:
             name: {{ include "skyramp-mocker.fullname" . }}
+        - name: {{ include "skyramp-mocker.userGrpcFilesConfigMapName" . }}
+          configMap:
+            name: {{ include "skyramp-mocker.userGrpcFilesConfigMapName" . }}
+        - name: {{ include "skyramp-mocker.userThriftFilesConfigMapName" . }}
+          configMap:
+            name: {{ include "skyramp-mocker.userThriftFilesConfigMapName" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -37,6 +43,10 @@ spec:
           volumeMounts:
             - name: {{ .Chart.Name }}
               mountPath: {{ .Values.bootConfig.mountPath }}
+            - name: {{ include "skyramp-mocker.userGrpcFilesConfigMapName" . }}
+              mountPath: {{ include "skyramp-mocker.userGrpcFilesMountPath" . }}
+            - name: {{ include "skyramp-mocker.userThriftFilesConfigMapName" . }}
+              mountPath: {{ include "skyramp-mocker.userThriftFilesMountPath" . }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

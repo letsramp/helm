@@ -8,3 +8,4 @@ data:
   config.yaml: |
     {{- include "skyramp-mocker.bootConfig" . | nindent 4 }}
   resources.yaml: "" 
+immutable: false

@@ -67,3 +67,30 @@ Boot config
 {{- define "skyramp-mocker.bootConfig" -}}
 {{- toYaml .Values.bootConfig.config }}
 {{- end }}
+
+{{/*
+Create the name of the mocker user file config maps and volumes to use
+*/}}
+{{- define "skyramp-mocker.userFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "skyramp-mocker.fullname" .) "files" }}
+{{- end }}
+
+{{- define "skyramp-mocker.userGrpcFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "skyramp-mocker.userFilesConfigMapName" .) "grpc" }}
+{{- end }}
+
+{{- define "skyramp-mocker.userThriftFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "skyramp-mocker.userFilesConfigMapName" .) "thrift" }}
+{{- end }}
+
+{{- define "skyramp-mocker.baseUserFilesMountPath" -}}
+/usr/local/lib/skyramp/idl
+{{- end }}
+
+{{- define "skyramp-mocker.userThriftFilesMountPath" -}}
+{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/thrift
+{{- end }}
+
+{{- define "skyramp-mocker.userGrpcFilesMountPath" -}}
+{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/grpc
+{{- end }}

@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "skyramp-mocker.userGrpcFilesConfigMapName" . }}
+  labels:
+    {{- include "skyramp-mocker.labels" . | nindent 4 }}
+data: null
+immutable: false
+---
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "skyramp-mocker.userThriftFilesConfigMapName" . }}
+  labels:
+    {{- include "skyramp-mocker.labels" . | nindent 4 }}
+data: null
+immutable: false
