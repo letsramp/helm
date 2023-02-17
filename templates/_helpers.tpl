@@ -88,9 +88,9 @@ Create the name of the mocker user file config maps and volumes to use
 {{- end }}
 
 {{- define "skyramp-mocker.userThriftFilesMountPath" -}}
-{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/thrift
+{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/thrift/files
 {{- end }}
 
 {{- define "skyramp-mocker.userGrpcFilesMountPath" -}}
-{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/grpc
+{{ include "skyramp-mocker.baseUserFilesMountPath" . }}/grpc/files
 {{- end }}
