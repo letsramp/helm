@@ -49,3 +49,74 @@ signatures:
       type: bool
       default: true
 {{- end }}
+
+{{/*
+Payload for a proto file 
+*/}}
+{{- define "skyramp-mocker-test.demo-proto" -}}
+syntax = "proto3";
+
+option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.helloworld";
+option java_outer_classname = "HelloWorldProto";
+
+package helloworld;
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayHello (HelloRequest) returns (HelloReply) {}
+}
+
+// The request message containing the user's name.
+message HelloRequest {
+  string name = 1;
+}
+
+// The response message containing the greetings
+message HelloReply {
+  string message = 1;
+}
+{{- end }}
+
+{{/*
+Payload for a gRPC mock description
+*/}}
+{{- define "skyramp-mocker-test.grpcPayload" -}}
+containers:
+- name: helloworld
+  ports:
+    - port1
+  image:
+    repository: whatever
+    tag: latest
+
+ports:
+- name: port1
+  endpoints:
+    - helloworld
+  protocol: grpc
+  port: 50051
+
+endpoints:
+- name: helloworld
+  defined:
+    name: Greeter # Name could be omitted if equal to endpoint's name
+    path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
+  methods:
+    - name: SayHello
+      input: HelloRequest
+      output: HelloReply
+
+signatures:
+- name: HelloRequest
+  fields:
+  - name: name
+    type: string
+- name: HelloReply
+  fields:
+  - name: message
+    type: string
+    default: "test"
+{{- end }}
