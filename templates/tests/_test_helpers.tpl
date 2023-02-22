@@ -88,6 +88,7 @@ containers:
 - name: helloworld
   ports:
     - port1
+    - port2
   image:
     repository: whatever
     tag: latest
@@ -98,9 +99,22 @@ ports:
     - helloworld
   protocol: grpc
   port: 50051
+- name: port2
+  endpoints:
+    - helloworld2
+  protocol: grpc
+  port: 50059
 
 endpoints:
 - name: helloworld
+  defined:
+    name: Greeter # Name could be omitted if equal to endpoint's name
+    path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
+  methods:
+    - name: SayHello
+      input: HelloRequest
+      output: HelloReply
+- name: helloworld2
   defined:
     name: Greeter # Name could be omitted if equal to endpoint's name
     path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
