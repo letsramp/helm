@@ -1,0 +1,21 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "skyramp-mocker.fullname" . }}-test-config-update-grpc-proto"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    # Add proto file
+    - name: add-proto-file 
+      image: curlimages/curl:7.87.0
+      command: 
+        - "/bin/sh"
+        - "-c"
+        - |
+          cat << EOF > /tmp/helloworld.proto
+          {{ include "skyramp-mocker-test.demo-proto" . | nindent 11 }}
+          EOF
+
+          curl -XPUT {{ include "skyramp-mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mockFiles -F "files[]=@/tmp/helloworld.proto"  
+  restartPolicy: Never

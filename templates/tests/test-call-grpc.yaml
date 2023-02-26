@@ -1,0 +1,72 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: "{{ include "skyramp-mocker.fullname" . }}-test-call-grpc"
+  annotations:
+    "helm.sh/hook": test
+spec:
+  containers:
+    - name: make-proto-call 
+      image: golang 
+      command: 
+        - "/bin/sh"
+        - "-c"
+        - |
+          apt update
+          apt install -y protobuf-compiler
+
+          mkdir /tmp/helloworld
+          cd /tmp/helloworld
+
+          cat << EOF > helloworld.proto
+          {{ include "skyramp-mocker-test.demo-proto" . | nindent 11 }}
+          EOF
+
+          go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
+          go install google.golang.org/protobuf/cmd/protoc-gen-go@v1.28
+
+          export PATH="$PATH:$(go env GOPATH)/bin"
+
+          mkdir helloworld
+          
+          protoc --go_out=helloworld --go_opt=paths=source_relative --go-grpc_out=helloworld --go-grpc_opt=paths=source_relative helloworld.proto
+
+          cat << EOF > main.go
+          package main
+
+          import (
+          	"context"
+          	"log"
+          	"time"
+          
+          	"google.golang.org/grpc"
+          	"google.golang.org/grpc/credentials/insecure"
+          	pb "example.com/m/helloworld"
+          )
+          
+          func main() {
+            addr := "helloworld:50051"
+            name := "myName"
+
+          	conn, err := grpc.Dial(addr, grpc.WithTransportCredentials(insecure.NewCredentials()))
+          	if err != nil {
+          		log.Fatalf("did not connect: %v", err)
+          	}
+          	defer conn.Close()
+          	c := pb.NewGreeterClient(conn)
+          
+          	// Contact the server and print out its response.
+          	ctx, cancel := context.WithTimeout(context.Background(), time.Second)
+          	defer cancel()
+          	r, err := c.SayHello(ctx, &pb.HelloRequest{Name: name})
+          	if err != nil {
+          		log.Fatalf("could not greet: %v", err)
+          	}
+          	log.Printf("Greeting: %s", r.GetMessage())
+          }
+          EOF
+
+          go mod init example.com/m
+          go mod tidy
+          go run main.go
+  restartPolicy: Never
