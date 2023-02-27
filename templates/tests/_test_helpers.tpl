@@ -87,23 +87,17 @@ Payload for a gRPC mock description
 containers:
 - name: helloworld
   ports:
-    - port1
-    - port2
+    - helloworld 
   image:
     repository: whatever
     tag: latest
 
 ports:
-- name: port1
+- name: helloworld 
   endpoints:
     - helloworld
   protocol: grpc
   port: 50051
-- name: port2
-  endpoints:
-    - helloworld2
-  protocol: grpc
-  port: 50059
 
 endpoints:
 - name: helloworld
@@ -112,25 +106,10 @@ endpoints:
     path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
   methods:
     - name: SayHello
-      input: HelloRequest
-      output: HelloReply
-- name: helloworld2
-  defined:
-    name: Greeter # Name could be omitted if equal to endpoint's name
-    path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
-  methods:
-    - name: SayHello
-      input: HelloRequest
-      output: HelloReply
+      responseValue: HelloReply 
 
-signatures:
-- name: HelloRequest
-  fields:
-  - name: name
-    type: string
-- name: HelloReply
-  fields:
-  - name: message
-    type: string
-    default: "test"
+responseValues:
+  - name: HelloReply
+    blob: |
+      { "message": "test" }
 {{- end }}
