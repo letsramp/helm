@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "skyramp-mocker.fullname" . }}-test-config-update-grpc"
+  name: "{{ include "mocker.fullname" . }}-test-config-update-grpc"
   annotations:
     "helm.sh/hook": test
 spec:
@@ -11,8 +11,8 @@ spec:
       command: ['curl']
       args: 
         - "-XPUT"
-        - "{{ include "skyramp-mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks"
+        - "{{ include "mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks"
         - "--data-binary"
         - | 
-        {{ include "skyramp-mocker-test.grpcPayload" . | nindent 10 }}
+        {{ include "mocker-test.grpcPayload" . | nindent 10 }}
   restartPolicy: Never

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "skyramp-mocker.fullname" . }}-test-call-grpc"
+  name: "{{ include "mocker.fullname" . }}-test-call-grpc"
   annotations:
     "helm.sh/hook": test
 spec:
@@ -19,7 +19,7 @@ spec:
           cd /tmp/helloworld
 
           cat << EOF > helloworld.proto
-          {{ include "skyramp-mocker-test.demo-proto" . | nindent 11 }}
+          {{ include "mocker-test.demo-proto" . | nindent 11 }}
           EOF
 
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
