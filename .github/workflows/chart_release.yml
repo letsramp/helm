@@ -29,6 +29,8 @@ jobs:
         env:
           CR_TOKEN: "${{ github.token }}"
         with:
+          version: v1.5.0
           charts_dir: charts
           release_name_template: ${{ github.repository }}-{{ .Chart.Name }}-{{ .Chart.Version }}
           create_gh_pages: false
+          charts_repo_url: https://letsramp.github.io/helm-charts
