@@ -1,0 +1,14 @@
+name: Chart Test on Push
+
+on: push
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Run chart-testing (list-changed)
+        id: list-changed
+        working-directory: charts
+        run: helm lint mocker --values mocker/values.yaml
