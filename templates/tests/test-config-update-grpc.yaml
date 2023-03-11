@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "skyramp-mocker.fullname" . }}-test-config-grpc"
+  name: "{{ include "mocker.fullname" . }}-test-config-grpc"
   annotations:
     "helm.sh/hook": test
 spec:
@@ -14,14 +14,14 @@ spec:
         - "-c"
         - |
           cat << EOF > /tmp/helloworld.proto
-          {{ include "skyramp-mocker-test.demo-proto" . | nindent 11 }}
+          {{ include "mocker-test.demo-proto" . | nindent 11 }}
           EOF
 
           cat << EOF > /tmp/helloworld.yaml
-          {{ include "skyramp-mocker-test.grpcPayload" . | nindent 11 }}
+          {{ include "mocker-test.grpcPayload" . | nindent 11 }}
           EOF
 
-          curl -XPUT {{ include "skyramp-mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks -F "mockFiles=@/tmp/helloworld.proto"
+          curl -XPUT {{ include "mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks -F "mockFiles=@/tmp/helloworld.proto"
           sleep 20
-          curl -XPUT {{ include "skyramp-mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks -F "mockFiles=@/tmp/helloworld.proto" -F "mockDescription=@/tmp/helloworld.yaml"
+          curl -XPUT {{ include "mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks -F "mockFiles=@/tmp/helloworld.proto" -F "mockDescription=@/tmp/helloworld.yaml"
   restartPolicy: Never
