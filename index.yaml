@@ -2,6 +2,16 @@ apiVersion: v1
 entries:
   mocker:
   - apiVersion: v2
+    appVersion: v0.4.17
+    created: "2023-03-16T20:57:00.820013291Z"
+    description: A Helm chart for Skyramp Mocker
+    digest: cc361cf62eaf3ea78616d063b24b132401f3f0a2ce50a5f41c07c44a13ed35a3
+    name: mocker
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/mocker-0.1.4/mocker-0.1.4.tgz
+    version: 0.1.4
+  - apiVersion: v2
     appVersion: v0.4.16
     created: "2023-03-15T23:31:59.47181302Z"
     description: A Helm chart for Skyramp Mocker
@@ -41,4 +51,4 @@ entries:
     urls:
     - https://github.com/letsramp/mocker-helm/releases/download/mocker-0.1.0/mocker-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-15T23:31:59.47184182Z"
+generated: "2023-03-16T20:57:00.820031192Z"
