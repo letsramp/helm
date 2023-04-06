@@ -1,7 +1,7 @@
 {{/*
 Payload for a new REST configuration
 */}}
-{{- define "mocker-test.restPayload" -}}
+{{- define "worker-test.restPayload" -}}
 containers:
 - name: test1
   image:
@@ -53,7 +53,7 @@ signatures:
 {{/*
 Payload for a proto file 
 */}}
-{{- define "mocker-test.demo-proto" -}}
+{{- define "worker-test.demo-proto" -}}
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
@@ -83,7 +83,7 @@ message HelloReply {
 {{/*
 Payload for a gRPC mock description
 */}}
-{{- define "mocker-test.grpcPayload" -}}
+{{- define "worker-test.grpcPayload" -}}
 containers:
 - name: helloworld
   ports:

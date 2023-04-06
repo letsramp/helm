@@ -2,14 +2,14 @@
 apiVersion: rbac.authorization.k8s.io/v1
 kind: RoleBinding
 metadata:
-  name: {{ include "mocker.fullname" . }}
+  name: {{ include "worker.fullname" . }}
   labels:
-    {{- include "mocker.labels" . | nindent 4 }}
+    {{- include "worker.labels" . | nindent 4 }}
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
-  name: {{ include "mocker.fullname" . }}
+  name: {{ include "worker.fullname" . }}
 subjects:
   - kind: ServiceAccount
-    name: {{ include "mocker.serviceAccountName" . }}
+    name: {{ include "worker.serviceAccountName" . }}
 {{- end }}

@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "mocker.fullname" . }}-test-call-rest"
+  name: "{{ include "worker.fullname" . }}-test-call-rest"
   annotations:
     "helm.sh/hook": test
 spec:

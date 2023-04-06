@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mocker.name" -}}
+{{- define "worker.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,23 +10,23 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "mocker.fullname" -}}
+{{- define "worker.fullname" -}}
 {{- .Chart.Name }}
 {{- end }}
 
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "mocker.chart" -}}
+{{- define "worker.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "mocker.labels" -}}
-helm.sh/chart: {{ include "mocker.chart" . }}
-{{ include "mocker.selectorLabels" . }}
+{{- define "worker.labels" -}}
+helm.sh/chart: {{ include "worker.chart" . }}
+{{ include "worker.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -36,8 +36,8 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "mocker.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "mocker.name" . }}
+{{- define "worker.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "worker.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/part-of: skyramp
 {{- end }}
@@ -45,9 +45,9 @@ app.kubernetes.io/part-of: skyramp
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "mocker.serviceAccountName" -}}
+{{- define "worker.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "mocker.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "worker.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}
@@ -56,33 +56,33 @@ Create the name of the service account to use
 {{/*
 Boot config
 */}}
-{{- define "mocker.bootConfig" -}}
+{{- define "worker.bootConfig" -}}
 {{- toYaml .Values.bootConfig.config }}
 {{- end }}
 
 {{/*
-Create the name of the mocker user file config maps and volumes to use
+Create the name of the worker user file config maps and volumes to use
 */}}
-{{- define "mocker.userFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "mocker.fullname" .) "files" }}
+{{- define "worker.userFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "worker.fullname" .) "files" }}
 {{- end }}
 
-{{- define "mocker.userGrpcFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "mocker.userFilesConfigMapName" .) "grpc" }}
+{{- define "worker.userGrpcFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "worker.userFilesConfigMapName" .) "grpc" }}
 {{- end }}
 
-{{- define "mocker.userThriftFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "mocker.userFilesConfigMapName" .) "thrift" }}
+{{- define "worker.userThriftFilesConfigMapName" -}}
+{{- printf "%s-%s" (include "worker.userFilesConfigMapName" .) "thrift" }}
 {{- end }}
 
-{{- define "mocker.baseUserFilesMountPath" -}}
+{{- define "worker.baseUserFilesMountPath" -}}
 /usr/local/lib/skyramp/idl
 {{- end }}
 
-{{- define "mocker.userThriftFilesMountPath" -}}
-{{ include "mocker.baseUserFilesMountPath" . }}/thrift/files
+{{- define "worker.userThriftFilesMountPath" -}}
+{{ include "worker.baseUserFilesMountPath" . }}/thrift/files
 {{- end }}
 
-{{- define "mocker.userGrpcFilesMountPath" -}}
-{{ include "mocker.baseUserFilesMountPath" . }}/grpc/files
+{{- define "worker.userGrpcFilesMountPath" -}}
+{{ include "worker.baseUserFilesMountPath" . }}/grpc/files
 {{- end }}
