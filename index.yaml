@@ -51,4 +51,15 @@ entries:
     urls:
     - https://github.com/letsramp/mocker-helm/releases/download/mocker-0.1.0/mocker-0.1.0.tgz
     version: 0.1.0
-generated: "2023-03-16T20:57:00.820031192Z"
+  worker:
+  - apiVersion: v2
+    appVersion: v0.4.17
+    created: "2023-04-10T18:40:54.660620601Z"
+    description: A Helm chart for Skyramp worker
+    digest: 90b7da155b9431b36f168e9226ac74c0d200410ba985fddade770bfa388a0307
+    name: worker
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
+    version: 0.1.4
+generated: "2023-04-10T18:40:54.660636802Z"
