@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "mocker.fullname" . }}-test-config-update-grpc-proto"
+  name: "{{ include "worker.fullname" . }}-test-config-update-grpc-proto"
   annotations:
     "helm.sh/hook": test
 spec:
@@ -14,8 +14,8 @@ spec:
         - "-c"
         - |
           cat << EOF > /tmp/helloworld.proto
-          {{ include "mocker-test.demo-proto" . | nindent 11 }}
+          {{ include "worker-test.demo-proto" . | nindent 11 }}
           EOF
 
-          curl -XPUT {{ include "mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mockFiles -F "files[]=@/tmp/helloworld.proto"
+          curl -XPUT {{ include "worker.fullname" . }}:{{ .Values.service.port }}/skyramp/mockFiles -F "files[]=@/tmp/helloworld.proto"
   restartPolicy: Never

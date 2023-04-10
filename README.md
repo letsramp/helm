@@ -11,10 +11,10 @@ If you had already added this repo earlier, run `helm repo update` to retrieve
 the latest versions of the packages.  You can then run `helm search repo
 skyramp` to see the charts.
 
-To install the mocker chart:
+To install the worker chart:
 
-    helm install my-mocker skyramp/mocker
+    helm install my-worker skyramp/worker
 
 To uninstall the chart:
 
-    helm delete my-mocker
+    helm delete my-worker

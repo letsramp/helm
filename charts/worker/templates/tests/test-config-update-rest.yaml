@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: "{{ include "mocker.fullname" . }}-test-config-update-rest"
+  name: "{{ include "worker.fullname" . }}-test-config-update-rest"
   annotations:
     "helm.sh/hook": test
 spec:
@@ -11,8 +11,8 @@ spec:
       command: ['curl']
       args: 
         - "-XPUT"
-        - "{{ include "mocker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks"
+        - "{{ include "worker.fullname" . }}:{{ .Values.service.port }}/skyramp/mocks"
         - "--data-binary"
         - | 
-        {{ include "mocker-test.restPayload" . | nindent 10 }}
+        {{ include "worker-test.restPayload" . | nindent 10 }}
   restartPolicy: Never

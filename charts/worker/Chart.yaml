@@ -1,6 +1,6 @@
 apiVersion: v2
-name: mocker
-description: A Helm chart for Skyramp Mocker
+name: worker
+description: A Helm chart for Skyramp worker
 
 # A chart can be either an 'application' or a 'library' chart.
 #

@@ -10,4 +10,4 @@ jobs:
         uses: actions/checkout@v2
       - name: Run chart-testing
         working-directory: charts
-        run: helm lint mocker --values mocker/values.yaml
+        run: helm lint worker --values worker/values.yaml
