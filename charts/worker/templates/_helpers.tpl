@@ -76,7 +76,7 @@ Create the name of the worker user file config maps and volumes to use
 {{- end }}
 
 {{- define "worker.baseUserFilesMountPath" -}}
-/usr/local/lib/skyramp/idl
+/etc/skyramp/idl
 {{- end }}
 
 {{- define "worker.userThriftFilesMountPath" -}}
