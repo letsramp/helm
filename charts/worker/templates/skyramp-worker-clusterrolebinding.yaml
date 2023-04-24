@@ -12,5 +12,5 @@ roleRef:
 subjects:
   - kind: ServiceAccount
     name: {{ include "worker.serviceAccountName" . }}
-    namespace: "*"
+    namespace: {{ .Release.Namespace }}
 {{- end }}
