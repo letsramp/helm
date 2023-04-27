@@ -7,11 +7,9 @@ Expand the name of the chart.
 
 {{/*
 Create a default fully qualified app name.
-We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
-If release name contains chart name it will be used as a full name.
 */}}
 {{- define "worker.fullname" -}}
-{{- .Chart.Name }}
+skyramp-worker
 {{- end }}
 
 {{/*
@@ -37,7 +35,7 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 Selector labels
 */}}
 {{- define "worker.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "worker.name" . }}
+app.kubernetes.io/name: {{ include "worker.fullname" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 app.kubernetes.io/part-of: skyramp
 {{- end }}
