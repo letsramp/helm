@@ -52,6 +52,15 @@ Create the name of the service account to use
 {{- end }}
 
 {{/*
+Create the name of the cluster role to use
+*/}}
+{{- define "worker.clusterRoleName" -}}
+{{- if .Values.serviceAccount.create }}
+{{- printf "%s-%s" (include "worker.fullname" .) .Release.Namespace }}
+{{- end }}
+{{- end }}
+
+{{/*
 Boot config
 */}}
 {{- define "worker.bootConfig" -}}
