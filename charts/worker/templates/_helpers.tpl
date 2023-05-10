@@ -44,18 +44,14 @@ app.kubernetes.io/part-of: skyramp
 Create the name of the service account to use
 */}}
 {{- define "worker.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "worker.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
-{{- end }}
+{{ include "worker.fullname" . }}
 {{- end }}
 
 {{/*
 Create the name of the cluster role to use
 */}}
 {{- define "worker.clusterRoleName" -}}
-{{- if .Values.serviceAccount.create }}
+{{- if .Values.rbac }}
 {{- printf "%s-%s" (include "worker.fullname" .) .Release.Namespace }}
 {{- end }}
 {{- end }}
