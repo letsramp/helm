@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "web-server.fullname" . }}-frontend
+  labels:
+    name: web-server-frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      name: web-server-frontend
+  template:
+    metadata:
+      labels:
+        name: web-server-frontend
+    spec:
+      containers:
+        - name: frontend
+          image: {{ .Values.frontend.image.repository }}:{{ .Values.frontend.image.tag }}
+          # env:
+          #   - name: NODE_ENV
+          #     value: production
+          ports:
+            - containerPort: 3000

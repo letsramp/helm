@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "web-server.fullname" . }}-frontend
+  labels:
+    name: web-server-frontend
+spec:
+  selector:
+    name: web-server-frontend
+  ports:
+    - protocol: TCP
+      port: 3000
+      targetPort: 3000
