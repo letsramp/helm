@@ -3,16 +3,16 @@ kind: Deployment
 metadata:
   name: {{ include "web-server.fullname" . }}-frontend
   labels:
-    name: web-server-frontend
+    name: frontend
 spec:
   replicas: 1
   selector:
     matchLabels:
-      name: web-server-frontend
+      name: frontend
   template:
     metadata:
       labels:
-        name: web-server-frontend
+        name: frontend
     spec:
       containers:
         - name: frontend

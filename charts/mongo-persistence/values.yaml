@@ -80,7 +80,7 @@ mongodb:
     enabled: true
     usernames: ["test"]
     passwords: ["test"]
-    databases: ["test"]
+    databases: ["dashboarddb"]
   backup:
     enabled: true
     schedule: "0 0 * * *"
