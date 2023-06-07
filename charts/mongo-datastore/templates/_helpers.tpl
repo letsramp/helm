@@ -1,7 +1,7 @@
 {{/*
 Expand the name of the chart.
 */}}
-{{- define "mongo-persistence.name" -}}
+{{- define "mongo-datastore.name" -}}
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
@@ -10,7 +10,7 @@ Create a default fully qualified app name.
 We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
 If release name contains chart name it will be used as a full name.
 */}}
-{{- define "mongo-persistence.fullname" -}}
+{{- define "mongo-datastore.fullname" -}}
 {{- if .Values.fullnameOverride }}
 {{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
 {{- else }}
@@ -26,16 +26,16 @@ If release name contains chart name it will be used as a full name.
 {{/*
 Create chart name and version as used by the chart label.
 */}}
-{{- define "mongo-persistence.chart" -}}
+{{- define "mongo-datastore.chart" -}}
 {{- printf "%s-%s" .Chart.Name .Chart.Version | replace "+" "_" | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
 {{/*
 Common labels
 */}}
-{{- define "mongo-persistence.labels" -}}
-helm.sh/chart: {{ include "mongo-persistence.chart" . }}
-{{ include "mongo-persistence.selectorLabels" . }}
+{{- define "mongo-datastore.labels" -}}
+helm.sh/chart: {{ include "mongo-datastore.chart" . }}
+{{ include "mongo-datastore.selectorLabels" . }}
 {{- if .Chart.AppVersion }}
 app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
 {{- end }}
@@ -45,17 +45,17 @@ app.kubernetes.io/managed-by: {{ .Release.Service }}
 {{/*
 Selector labels
 */}}
-{{- define "mongo-persistence.selectorLabels" -}}
-app.kubernetes.io/name: {{ include "mongo-persistence.name" . }}
+{{- define "mongo-datastore.selectorLabels" -}}
+app.kubernetes.io/name: {{ include "mongo-datastore.name" . }}
 app.kubernetes.io/instance: {{ .Release.Name }}
 {{- end }}
 
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "mongo-persistence.serviceAccountName" -}}
+{{- define "mongo-datastore.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
-{{- default (include "mongo-persistence.fullname" .) .Values.serviceAccount.name }}
+{{- default (include "mongo-datastore.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
 {{- default "default" .Values.serviceAccount.name }}
 {{- end }}

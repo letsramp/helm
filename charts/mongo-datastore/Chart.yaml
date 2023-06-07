@@ -1,6 +1,6 @@
 apiVersion: v2
-name: mongo-persistence
-description: A Helm chart for Kubernetes
+name: mongo-datastore
+description: Skyramp's MongoDB datastore
 
 # A chart can be either an 'application' or a 'library' chart.
 #

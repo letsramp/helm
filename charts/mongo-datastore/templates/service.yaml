@@ -1,9 +1,9 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: {{ include "mongo-persistence.fullname" . }}
+  name: {{ include "mongo-datastore.fullname" . }}
   labels:
-    {{- include "mongo-persistence.labels" . | nindent 4 }}
+    {{- include "mongo-datastore.labels" . | nindent 4 }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +12,4 @@ spec:
       protocol: TCP
       name: http
   selector:
-    {{- include "mongo-persistence.selectorLabels" . | nindent 4 }}
+    {{- include "mongo-datastore.selectorLabels" . | nindent 4 }}
