@@ -1,6 +1,6 @@
 apiVersion: v2
 name: web-server
-description: A Helm chart for Kubernetes
+description: Management plane dashboard for Skyramp
 
 # A chart can be either an 'application' or a 'library' chart.
 #
