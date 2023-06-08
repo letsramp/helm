@@ -8,4 +8,5 @@ data:
   config.yaml: |
     {{- include "worker.bootConfig" . | nindent 4 }}
   resources.yaml: "" 
+  schemaConfig.yaml: ""
 immutable: false

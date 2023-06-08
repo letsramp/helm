@@ -62,30 +62,3 @@ Boot config
 {{- define "worker.bootConfig" -}}
 {{- toYaml .Values.bootConfig.config }}
 {{- end }}
-
-{{/*
-Create the name of the worker user file config maps and volumes to use
-*/}}
-{{- define "worker.userFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "worker.fullname" .) "files" }}
-{{- end }}
-
-{{- define "worker.userGrpcFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "worker.userFilesConfigMapName" .) "grpc" }}
-{{- end }}
-
-{{- define "worker.userThriftFilesConfigMapName" -}}
-{{- printf "%s-%s" (include "worker.userFilesConfigMapName" .) "thrift" }}
-{{- end }}
-
-{{- define "worker.baseUserFilesMountPath" -}}
-/etc/skyramp/idl
-{{- end }}
-
-{{- define "worker.userThriftFilesMountPath" -}}
-{{ include "worker.baseUserFilesMountPath" . }}/thrift/files
-{{- end }}
-
-{{- define "worker.userGrpcFilesMountPath" -}}
-{{ include "worker.baseUserFilesMountPath" . }}/grpc/files
-{{- end }}
