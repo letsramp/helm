@@ -19,7 +19,7 @@ spec:
           cd /tmp/helloworld
 
           cat << EOF > helloworld.proto
-          {{ include "worker-test.demo-proto" . | nindent 11 }}
+          {{ include "worker-test.demoProto" . | nindent 11 }}
           EOF
 
           go install google.golang.org/grpc/cmd/protoc-gen-go-grpc@v1.2
