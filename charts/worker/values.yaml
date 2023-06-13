@@ -59,3 +59,16 @@ bootConfig:
     managementPort: 35142
     backend: "kubernetes"
   mountPath: "/etc/skyramp"
+
+ManagementPlaneConfig:
+  mongoConfig:
+    enabled: true
+    mongodbUrl: mongodb://mongo-datastore.skyramp:27017
+    username: "test"
+    password: "test"
+    database: "dashboarddb"
+    testResultCollection: "testresults"
+    mockCollection: "servicemocks"
+  prometheusConfig:
+    enabled: true
+    pushGatewayUrl: http://prom-prometheus-pushgateway.skyramp:9091`

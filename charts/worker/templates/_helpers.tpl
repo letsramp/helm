@@ -64,6 +64,13 @@ Boot config
 {{- end }}
 
 {{/*
+Managet Plane config
+*/}}
+{{- define "worker.managementPlaneConfig" -}}
+{{- toYaml .Values.ManagementPlaneConfig }}
+{{- end }}
+
+{{/*
 Create the name of the worker user file config maps and volumes to use
 */}}
 {{- define "worker.userFilesConfigMapName" -}}
