@@ -28,12 +28,6 @@ spec:
         - name: {{ .Chart.Name }}
           configMap:
             name: {{ include "worker.fullname" . }}
-        - name: {{ include "worker.userGrpcFilesConfigMapName" . }}
-          configMap:
-            name: {{ include "worker.userGrpcFilesConfigMapName" . }}
-        - name: {{ include "worker.userThriftFilesConfigMapName" . }}
-          configMap:
-            name: {{ include "worker.userThriftFilesConfigMapName" . }}
       containers:
         - name: {{ .Chart.Name }}
           securityContext:
@@ -43,10 +37,6 @@ spec:
           volumeMounts:
             - name: {{ .Chart.Name }}
               mountPath: {{ .Values.bootConfig.mountPath }}
-            - name: {{ include "worker.userGrpcFilesConfigMapName" . }}
-              mountPath: {{ include "worker.userGrpcFilesMountPath" . }}
-            - name: {{ include "worker.userThriftFilesConfigMapName" . }}
-              mountPath: {{ include "worker.userThriftFilesMountPath" . }}
           ports:
             - name: http
               containerPort: {{ .Values.service.port }}

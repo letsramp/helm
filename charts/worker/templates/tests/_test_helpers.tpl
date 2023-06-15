@@ -51,9 +51,24 @@ signatures:
 {{- end }}
 
 {{/*
+Payload for a proto schema
+*/}}
+{{- define "worker-test.demoSchema" -}}
+protoConfigs:
+    - protoPath: pb
+      contents: !!binary |
+        CqYCChBoZWxsb3dvcmxkLnByb3RvEgpoZWxsb3dvcmxkIiIKDEhlbGxvUmVxdWVzdBISCg
+        RuYW1lGAEgASgJUgRuYW1lIiYKCkhlbGxvUmVwbHkSGAoHbWVzc2FnZRgBIAEoCVIHbWVz
+        c2FnZTJJCgdHcmVldGVyEj4KCFNheUhlbGxvEhguaGVsbG93b3JsZC5IZWxsb1JlcXVlc3
+        QaFi5oZWxsb3dvcmxkLkhlbGxvUmVwbHkiAEJnChtpby5ncnBjLmV4YW1wbGVzLmhlbGxv
+        d29ybGRCD0hlbGxvV29ybGRQcm90b1ABWjVnb29nbGUuZ29sYW5nLm9yZy9ncnBjL2V4YW
+        1wbGVzL2hlbGxvd29ybGQvaGVsbG93b3JsZGIGcHJvdG8z
+{{- end }}
+
+{{/*
 Payload for a proto file 
 */}}
-{{- define "worker-test.demo-proto" -}}
+{{- define "worker-test.demoProto" -}}
 syntax = "proto3";
 
 option go_package = "google.golang.org/grpc/examples/helloworld/helloworld";
@@ -103,7 +118,9 @@ endpoints:
 - name: helloworld
   defined:
     name: Greeter # Name could be omitted if equal to endpoint's name
-    path: "/usr/local/lib/skyramp/idl/grpc/files/helloworld.proto"
+    path: "helloworld.proto"
+    protoPaths:
+      - /usr/local/lib/skyramp/idl/grpc/files/pb
   methods:
     - name: SayHello
       responseValue: HelloReply 
