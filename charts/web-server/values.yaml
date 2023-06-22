@@ -74,11 +74,15 @@ tolerations: []
 
 affinity: {}
 
+# Whether higher level permissions should be requested for the Skyramp worker.
+# This is required for various functionality, such as detailed k8s metrics fetching.
+rbac: false
+
 backend:
   name: "dashboard-server"
   image:
     repository: 296613639307.dkr.ecr.us-west-2.amazonaws.com/dev/dashboard-server
-    tag: 0.1.0
+    tag: ""
   service:
     type: ClusterIP
     port: 4000   
@@ -87,7 +91,7 @@ frontend:
   name: "dashboard-client"
   image:
     repository: 296613639307.dkr.ecr.us-west-2.amazonaws.com/dev/dashboard-client
-    tag: 0.1.0
+    tag: ""
   service:
     type: ClusterIP
     port: 3000

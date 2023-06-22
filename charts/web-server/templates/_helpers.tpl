@@ -5,6 +5,24 @@ Expand the name of the chart.
 {{- default .Chart.Name .Values.nameOverride | trunc 63 | trimSuffix "-" }}
 {{- end }}
 
+{{/*
+Create a default fully qualified app name.
+We truncate at 63 chars because some Kubernetes name fields are limited to this (by the DNS naming spec).
+If release name contains chart name it will be used as a full name.
+*/}}
+{{- define "web-server.fullname" -}}
+{{- if .Values.fullnameOverride }}
+{{- .Values.fullnameOverride | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- $name := default .Chart.Name .Values.nameOverride }}
+{{- if contains $name .Release.Name }}
+{{- .Release.Name | trunc 63 | trimSuffix "-" }}
+{{- else }}
+{{- printf "%s-%s" .Release.Name $name | trunc 63 | trimSuffix "-" }}
+{{- end }}
+{{- end }}
+{{- end }}
+
 {{- define "backend.fullname" -}}
 {{.Values.backend.name }}
 {{- end }}
@@ -21,15 +39,24 @@ Create chart name and version as used by the chart label.
 {{- end }}
 
 {{/*
+Common labels
+*/}}
+{{- define "web-server.labels" -}}
+helm.sh/chart: {{ include "web-server.chart" . }}
+{{- if .Chart.AppVersion }}
+app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
+{{- end }}
+app.kubernetes.io/managed-by: {{ .Release.Service }}
+app.kubernetes.io/instance: {{ .Release.Name }}
+{{- end }}
+
+{{/*
 Common backend labels
 */}}
 {{- define "backend.labels" -}}
 helm.sh/chart: {{ include "web-server.chart" . }}
 {{ include "backend.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "web-server.labels" . }}
 {{- end }}
 
 {{/*
@@ -46,10 +73,7 @@ Common frontend labels
 {{- define "frontend.labels" -}}
 helm.sh/chart: {{ include "web-server.chart" . }}
 {{ include "frontend.selectorLabels" . }}
-{{- if .Chart.AppVersion }}
-app.kubernetes.io/version: {{ .Chart.AppVersion | quote }}
-{{- end }}
-app.kubernetes.io/managed-by: {{ .Release.Service }}
+{{ include "web-server.labels" . }}
 {{- end }}
 
 {{/*
@@ -63,7 +87,7 @@ app.kubernetes.io/instance: {{ .Release.Name }}
 {{/*
 Create the name of the service account to use
 */}}
-{{- define "backend.serviceAccountName" -}}
+{{- define "web-server.serviceAccountName" -}}
 {{- if .Values.serviceAccount.create }}
 {{- default (include "backend.fullname" .) .Values.serviceAccount.name }}
 {{- else }}
@@ -71,13 +95,12 @@ Create the name of the service account to use
 {{- end }}
 {{- end }}
 
+
 {{/*
-Create the name of the service account to use
+Create the name of the cluster role to use
 */}}
-{{- define "frontend.serviceAccountName" -}}
-{{- if .Values.serviceAccount.create }}
-{{- default (include "frontend.fullname" .) .Values.serviceAccount.name }}
-{{- else }}
-{{- default "default" .Values.serviceAccount.name }}
+{{- define "backend.clusterRoleName" -}}
+{{- if .Values.rbac }}
+{{- printf "%s-%s" (include "backend.fullname" .) .Release.Namespace }}
 {{- end }}
 {{- end }}
