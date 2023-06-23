@@ -83,6 +83,6 @@ affinity: {}
 
 mongodb:
   auth:
-    username: test
-    password: test
-    database: dashboarddb
+    username: ""
+    password: ""
+    database: ""
