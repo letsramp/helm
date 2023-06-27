@@ -1,0 +1,67 @@
+apiVersion: mongodbcommunity.mongodb.com/v1
+kind: MongoDBCommunity
+metadata:
+  name: mongo-datastore
+spec:
+  members: 2
+  type: ReplicaSet
+  version: "5.0.5"
+  security:
+    authentication:
+      modes:
+      - SCRAM
+  users:
+  - name: test
+    db: admin
+    passwordSecretRef:
+      name: admin-user-password
+    roles:
+      - name: clusterAdmin
+        db: dashboarddb
+      - name: userAdminAnyDatabase
+        db: dashboarddb
+      - name: root
+        db: admin 
+    scramCredentialsSecretName: my-scram
+  additionalMongodConfig:
+    storage.wiredTiger.engineConfig.journalCompressor: zlib
+  statefulSet:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: mongod
+            resources:
+              limits:
+                cpu: "1"
+                memory: 2Gi
+              requests:
+                cpu: 500m
+                memory: 1Gi      
+          affinity:
+            podAntiAffinity:
+              requiredDuringSchedulingIgnoredDuringExecution:
+              - labelSelector:
+                  matchExpressions:
+                  - key: name
+                    operator: In
+                    values:
+                    - mongo-datastore
+                topologyKey: "kubernetes.io/hostname"
+      volumeClaimTemplates:
+      - metadata:
+          name: mongo-datastore-volume1
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5G
+      - metadata:
+          name: mongo-datastore-volume2
+        spec:
+          accessModes:
+          - ReadWriteOnce
+          resources:
+            requests:
+              storage: 5G        
