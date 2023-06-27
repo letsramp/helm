@@ -7,7 +7,7 @@ metadata:
     {{- include "mongo-datastore.labels" . | nindent 4 }}
 spec:
   serviceName: {{ include "mongo-datastore.fullname" . }}-svc
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       {{- include "mongo-datastore.selectorLabels" . | nindent 6 }}
@@ -20,12 +20,6 @@ spec:
       containers:
       - name: mongodb
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
-        command:
-            - "mongod"
-            - "--bind_ip"
-            - "0.0.0.0"
-            - "--replSet"
-            - "MainRepSet"
         ports:
         - containerPort: {{ .Values.service.port }}
         env:

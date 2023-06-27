@@ -11,7 +11,7 @@ spec:
       modes:
       - SCRAM
   users:
-  - name: test
+  - name: admin
     db: admin
     passwordSecretRef:
       name: admin-user-password
