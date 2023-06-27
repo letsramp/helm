@@ -7,6 +7,7 @@ image:
   pullPolicy: IfNotPresent
   # Overrides the image tag whose default is the chart appVersion.
   tag: ""
+  tag: "77706dd"
 
 imagePullSecrets: []
 nameOverride: ""
@@ -64,8 +65,8 @@ ManagementPlaneConfig:
   mongoConfig:
     enabled: true
     mongodbUrl: mongodb://mongo-datastore.skyramp:27017
-    username: "test"
-    password: "test"
+    username: "admin"
+    password: "pa$$w0rd"
     database: "dashboarddb"
     testResultCollection: "testresults"
     mockCollection: "servicemocks"
