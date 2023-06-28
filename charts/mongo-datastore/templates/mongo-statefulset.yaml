@@ -33,24 +33,14 @@ spec:
           - name: MONGO_INITDB_DATABASE
             value: {{ .Values.mongodb.auth.database }}
         volumeMounts:
-        - name: mongodb-storage
-          mountPath: /data/mongodb
-      affinity:
-        podAntiAffinity:
-          requiredDuringSchedulingIgnoredDuringExecution:
-          - labelSelector:
-              matchExpressions:
-              - key: name
-                operator: In
-                values:
-                - mongo-datastore
-            topologyKey: kubernetes.io/hostname  
+          - name: mongodb-storage
+            mountPath: /data/mongodb  
   volumeClaimTemplates:
-  - metadata:
-      name: mongodb-storage
-    spec:
-      accessModes: [ "ReadWriteOnce" ]
-      resources:
-        requests:
-          storage: 10Gi
+    - metadata:
+        name: mongodb-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
 {{- end }}
