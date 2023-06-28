@@ -34,7 +34,7 @@ spec:
             value: {{ .Values.mongodb.auth.database }}
         volumeMounts:
           - name: mongodb-storage
-            mountPath: /data/mongodb  
+            mountPath: /data/db 
   volumeClaimTemplates:
     - metadata:
         name: mongodb-storage
