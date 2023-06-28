@@ -50,15 +50,7 @@ spec:
                 topologyKey: "kubernetes.io/hostname"
       volumeClaimTemplates:
       - metadata:
-          name: mongo-datastore-volume1
-        spec:
-          accessModes:
-          - ReadWriteOnce
-          resources:
-            requests:
-              storage: 5G
-      - metadata:
-          name: mongo-datastore-volume2
+          name: mongo-datastore
         spec:
           accessModes:
           - ReadWriteOnce
