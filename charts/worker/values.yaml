@@ -69,4 +69,4 @@ ManagementPlaneConfig:
     mockCollection: "servicemocks"
   prometheusConfig:
     enabled: true
-    pushGatewayUrl: http://prom-prometheus-pushgateway.skyramp:9091`
+    pushGatewayUrl: http://prom-prometheus-pushgateway.skyramp:9091
