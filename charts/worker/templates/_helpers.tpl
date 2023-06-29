@@ -64,7 +64,7 @@ Boot config
 {{- end }}
 
 {{/*
-Managet Plane config
+Management plane config
 */}}
 {{- define "worker.managementPlaneConfig" -}}
 {{- toYaml .Values.ManagementPlaneConfig }}
