@@ -5,6 +5,8 @@ metadata:
   labels:
     {{- include "worker.labels" . | nindent 4 }}
 data:
+  management-plane-config.yaml: |
+    {{- include "worker.managementPlaneConfig" . | nindent 4 }}
   config.yaml: |
     {{- include "worker.bootConfig" . | nindent 4 }}
   resources.yaml: "" 
