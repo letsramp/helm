@@ -1,0 +1,41 @@
+
+image:
+  pullPolicy: IfNotPresent
+
+imagePullSecrets: []
+nameOverride: ""
+fullnameOverride: ""
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: ""
+
+# Whether higher level permissions should be requested for the Skyramp worker.
+# This is required for various functionality, such as detailed k8s metrics fetching.
+rbac: false
+
+autoscaling:
+  enabled: false
+
+backend:
+  name: "dashboard-server"
+  image:
+    repository: public.ecr.aws/j1n2c2p2/rampup/dashboard-server
+    tag: ""
+  service:
+    type: ClusterIP
+    port: 4000   
+ 
+frontend:
+  name: "dashboard-client"
+  image:
+    repository:  public.ecr.aws/j1n2c2p2/rampup/dashboard-client
+    tag: ""
+  service:
+    type: ClusterIP
+    port: 3000

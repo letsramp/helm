@@ -1,0 +1,46 @@
+{{- if not .Values.operator.enabled -}}
+apiVersion: apps/v1
+kind: StatefulSet
+metadata:
+  name: {{ include "mongo-datastore.fullname" . }}
+  labels:
+    {{- include "mongo-datastore.labels" . | nindent 4 }}
+spec:
+  serviceName: {{ include "mongo-datastore.fullname" . }}-svc
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "mongo-datastore.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        replicaset: MainRepSet
+        {{- include "mongo-datastore.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: mongodb
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+        ports:
+        - containerPort: {{ .Values.service.port }}
+        env:
+          - name: MONGO_INITDB_ROOT_USERNAME
+            value: {{ .Values.mongodb.auth.username }}
+          - name: MONGO_INITDB_ROOT_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: admin-user-password
+                key: password
+          - name: MONGO_INITDB_DATABASE
+            value: {{ .Values.mongodb.auth.database }}
+        volumeMounts:
+          - name: mongodb-storage
+            mountPath: /data/db 
+  volumeClaimTemplates:
+    - metadata:
+        name: mongodb-storage
+      spec:
+        accessModes: [ "ReadWriteOnce" ]
+        resources:
+          requests:
+            storage: 10Gi
+{{- end }}
