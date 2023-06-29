@@ -1,5 +1,23 @@
 apiVersion: v1
 entries:
+  prometheus:
+  - apiVersion: v2
+    appVersion: 1.1.0
+    created: "2023-06-29T02:19:52.447757275Z"
+    dependencies:
+    - name: kube-prometheus-stack
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 46.5.*
+    - name: prometheus-pushgateway
+      repository: https://prometheus-community.github.io/helm-charts
+      version: 2.2.*
+    description: Skyramp prometheus Helm Chart
+    digest: 4f43326a3b071dd92c58ed2f49de6639756fab2808af19996bf2d73c081a69cb
+    name: prometheus
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/prometheus-0.1.0/prometheus-0.1.0.tgz
+    version: 0.1.0
   worker:
   - apiVersion: v2
     appVersion: v0.4.28
@@ -151,4 +169,4 @@ entries:
     urls:
     - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
     version: 0.1.4
-generated: "2023-06-28T20:47:28.505499611Z"
+generated: "2023-06-29T02:19:52.447796876Z"
