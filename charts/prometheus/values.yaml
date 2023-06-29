@@ -1,0 +1,11 @@
+# Default values for monitoring.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+prometheus-operator:
+  enabled: true
+  prometheusOperator.createCustomResource: true
+
+pushgateway:
+  enabled: true
+
