@@ -1,0 +1,23 @@
+namespace: skyramp
+containers:
+  - type: helm
+    releaseName: skyramp-dashboard-release
+    path: ../../charts/mongo-datastore
+    valuesPath: ../../charts/mongo-datastore/values.yaml
+    values:
+     mongodb:
+      auth:
+        username: "admin"
+        password: "pa$$word"
+        database: "dashboarddb"
+  - type: helm
+    releaseName: skyramp-dashboard-release2
+    path: ../../charts/web-server
+    valuesPath: ../../charts/web-server/values.yaml
+    values:
+     mongodb:
+      auth:
+        username: "admin"
+        password: "pa$$word"
+        database: "dashboarddb"
+   
