@@ -1,7 +1,7 @@
 namespace: skyramp
 containers:
   - type: helm
-    releaseName: skyramp-dashboard-release
+    releaseName: skyramp-dashboard
     path: ../../charts/mongo-datastore
     valuesPath: ../../charts/mongo-datastore/values.yaml
     values:
@@ -11,7 +11,7 @@ containers:
         password: "pa$$word"
         database: "dashboarddb"
   - type: helm
-    releaseName: skyramp-dashboard-release2
+    releaseName: skyramp-dashboard
     path: ../../charts/web-server
     valuesPath: ../../charts/web-server/values.yaml
     values:
