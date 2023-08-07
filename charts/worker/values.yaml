@@ -63,7 +63,7 @@ bootConfig:
 ManagementPlaneConfig:
   mongoConfig:
     enabled: true
-    mongodbUrl: "mongodb://admin:pa$$w0rd@mongo-datastore-svc.skyramp:27017/?authSource=admin&authMechanism=SCRAM-SHA-256"
+    mongodbUrl: "mongodb://admin:pa$$word@mongo-datastore-svc.skyramp:27017/?authSource=admin&authMechanism=SCRAM-SHA-256"
     database: "dashboarddb"
     testResultCollection: "testresults"
     mockCollection: "servicemocks"
