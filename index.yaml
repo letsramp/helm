@@ -3,21 +3,6 @@ entries:
   mongo-datastore:
   - apiVersion: v2
     appVersion: 6.0.6
-    created: "2023-08-08T20:42:39.600310915Z"
-    dependencies:
-    - condition: operator.enabled
-      name: community-operator
-      repository: https://mongodb.github.io/helm-charts
-      version: 0.8.0
-    description: Skyramp's MongoDB datastore
-    digest: 297fa5561b63bf88abb62b03867857c9fcbe598cf46ccf2c5f41eda7b081d60a
-    name: mongo-datastore
-    type: application
-    urls:
-    - https://github.com/letsramp/helm/releases/download/mongo-datastore-0.1.1/mongo-datastore-0.1.1.tgz
-    version: 0.1.1
-  - apiVersion: v2
-    appVersion: 6.0.6
     created: "2023-07-05T18:07:12.380287869Z"
     dependencies:
     - condition: operator.enabled
