@@ -1,3 +1,4 @@
+{{- if .Values.mongo_operator_resources.enabled -}}
 apiVersion: mongodbcommunity.mongodb.com/v1
 kind: MongoDBCommunity
 metadata:
@@ -57,3 +58,4 @@ spec:
           resources:
             requests:
               storage: 5G   
+{{- end }}

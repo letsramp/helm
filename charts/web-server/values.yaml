@@ -39,3 +39,6 @@ frontend:
   service:
     type: ClusterIP
     port: 3000
+
+mongo_operator_resources:
+  enabled: true
