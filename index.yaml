@@ -3,6 +3,21 @@ entries:
   mongo-datastore:
   - apiVersion: v2
     appVersion: 6.0.6
+    created: "2023-08-17T19:14:28.215248051Z"
+    dependencies:
+    - condition: operator.enabled
+      name: community-operator
+      repository: https://mongodb.github.io/helm-charts
+      version: 0.8.0
+    description: Skyramp's MongoDB datastore
+    digest: 4c181dbaa46668bf737a248542167550d93b3389768ac17089b951d6be6ad03f
+    name: mongo-datastore
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/mongo-datastore-0.1.2/mongo-datastore-0.1.2.tgz
+    version: 0.1.2
+  - apiVersion: v2
+    appVersion: 6.0.6
     created: "2023-08-08T23:19:00.19156287Z"
     dependencies:
     - condition: operator.enabled
@@ -91,6 +106,16 @@ entries:
     - https://github.com/letsramp/helm/releases/download/web-server-0.1.2/web-server-0.1.2.tgz
     version: 0.1.2
   worker:
+  - apiVersion: v2
+    appVersion: v0.4.33
+    created: "2023-08-17T19:14:28.332001116Z"
+    description: A Helm chart for Skyramp worker
+    digest: a9d5468afc77dd3dafde63648a5f8a57794e8cbfd006cc3fc24b7889dbfc0862
+    name: worker
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/worker-0.1.24/worker-0.1.24.tgz
+    version: 0.1.24
   - apiVersion: v2
     appVersion: v0.4.32
     created: "2023-08-08T20:42:39.853423444Z"
@@ -291,4 +316,4 @@ entries:
     urls:
     - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
     version: 0.1.4
-generated: "2023-08-08T23:19:00.19162047Z"
+generated: "2023-08-17T19:14:28.332179818Z"
