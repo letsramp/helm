@@ -1,0 +1,7 @@
+namespace: skyramp
+containers:
+  - type: helm
+    releaseName: skyramp-grafana-dashboard
+    chartRepository: https://letsramp.github.io/helm/
+    chartName: prometheus
+   

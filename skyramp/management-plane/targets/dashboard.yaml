@@ -2,8 +2,8 @@ namespace: skyramp
 containers:
   - type: helm
     releaseName: skyramp-dashboard
-    path: ../../charts/mongo-datastore
-    valuesPath: ../../charts/mongo-datastore/values.yaml
+    chartRepository: https://letsramp.github.io/helm/
+    chartName: mongo-datastore
     values:
      mongodb:
       auth:
@@ -12,12 +12,6 @@ containers:
         database: "dashboarddb"
   - type: helm
     releaseName: skyramp-dashboard
-    path: ../../charts/web-server
-    valuesPath: ../../charts/web-server/values.yaml
-    values:
-     mongodb:
-      auth:
-        username: "admin"
-        password: "pa$$word"
-        database: "dashboarddb"
+    chartRepository: https://letsramp.github.io/helm/
+    chartName: web-server
    
