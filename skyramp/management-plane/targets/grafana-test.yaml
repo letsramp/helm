@@ -1,6 +1,0 @@
-namespace: skyramp
-containers:
-  - type: helm
-    releaseName: skyramp-grafana-dashboard
-    path: ../../charts/prometheus
-   
