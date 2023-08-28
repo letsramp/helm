@@ -1,0 +1,13 @@
+# define namespace
+NS := "skyramp"
+
+install:
+  helm install mocker . -n {{ NS }} --create-namespace
+
+uninstall:
+  helm uninstall mocker -n {{ NS }}
+
+port-forward:
+  #!/bin/bash
+  POD=$(kubectl get po -n {{ NS }} | grep skyramp-worker | awk '{ print $1 }')
+  kubectl port-forward $POD -n {{ NS }} 8080:8080

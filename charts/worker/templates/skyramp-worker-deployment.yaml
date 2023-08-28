@@ -25,6 +25,7 @@ spec:
       securityContext:
         {{- toYaml .Values.podSecurityContext | nindent 8 }}
       volumes:
+        {{- toYaml .Values.persistence.hostPath.volume | nindent 8 }}
         - name: {{ .Chart.Name }}
           configMap:
             name: {{ include "worker.fullname" . }}
@@ -39,8 +40,14 @@ spec:
           securityContext:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
+          command:
+            {{- toYaml .Values.command | nindent 12 }}
+          env:
+          - name: CGO_ENABLED
+            value: "1"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
           volumeMounts:
+            {{- toYaml .Values.persistence.hostPath.volumeMount | nindent 12 }}
             - name: {{ .Chart.Name }}
               mountPath: {{ .Values.bootConfig.mountPath }}
             - name: {{ include "worker.userGrpcFilesConfigMapName" . }}
@@ -56,9 +63,7 @@ spec:
                 #     path: /
                 #     port: http
           readinessProbe:
-            httpGet:
-              path: /readyz
-              port: {{ .Values.bootConfig.config.managementPort }} 
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}

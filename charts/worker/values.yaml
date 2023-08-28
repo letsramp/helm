@@ -2,18 +2,35 @@
 # This is a YAML-formatted file.
 # Declare variables to be passed into your templates.
 
+persistence:
+  hostPath:
+    volumeMount:
+      - name: source
+        mountPath: /root/skyramp
+    volume:
+       - name: source
+         hostPath:
+           path: /host-mount
+command:
+  - "/bin/sh"
+  - "-c"
+  - |
+    ln -s /root/skyramp/web/templates /root/tmpl
+    cd /root/skyramp && go run ./cmd/airgap
+    cd /root/skyramp && go mod download
+    /start-server.sh
+
 image:
-  repository: public.ecr.aws/j1n2c2p2/rampup/worker
-  pullPolicy: IfNotPresent
-  # Overrides the image tag whose default is the chart appVersion.
-  tag: ""
+  repository: pellepedro/skydev
+  pullPolicy: Always
+  tag: code-server-arm64
 
 imagePullSecrets: []
 nameOverride: ""
 
 # Whether higher level permissions should be requested for the Skyramp worker.
 # This is required for various functionality, such as detailed k8s metrics fetching.
-rbac: false
+rbac: true
 
 serviceAccount:
   # Annotations to add to the service account
