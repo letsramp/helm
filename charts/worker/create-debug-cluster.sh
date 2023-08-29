@@ -8,6 +8,6 @@ kind: Cluster
 nodes:
   - role: control-plane
     extraMounts:
-      - hostPath: /Users/pedro/git/letsramp/skyramp/
+      - hostPath: /Users/shinychimra/skyramp/skyramp
         containerPath: /host-mount
 EOF

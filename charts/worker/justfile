@@ -1,5 +1,5 @@
 # define namespace
-NS := "skyramp"
+NS := "test-grpc-demo"
 
 install:
   helm install mocker . -n {{ NS }} --create-namespace
