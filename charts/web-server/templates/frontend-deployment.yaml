@@ -37,6 +37,10 @@ spec:
             - name: http
               containerPort: {{ .Values.frontend.service.port }}
               protocol: TCP
+          readinessProbe:
+            httpGet:
+              path: /readyz
+              port:  {{ .Values.frontend.service.port }}
           resources:
             {{- toYaml .Values.resources | nindent 12 }}
       {{- with .Values.nodeSelector }}
