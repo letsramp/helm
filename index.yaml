@@ -1,5 +1,16 @@
 apiVersion: v1
 entries:
+  echo:
+  - apiVersion: v2
+    appVersion: latest
+    created: "2024-01-11T02:19:36.654222314Z"
+    description: echo service
+    digest: 396bc316723fab1b4f014865330abffb0493409c11f9a918bc05844e78486005
+    name: echo
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/echo-0.1.0/echo-0.1.0.tgz
+    version: 0.1.0
   mongo-datastore:
   - apiVersion: v2
     appVersion: 6.0.6
@@ -666,4 +677,4 @@ entries:
     urls:
     - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
     version: 0.1.4
-generated: "2024-01-05T16:30:46.536524807Z"
+generated: "2024-01-11T02:19:36.65438652Z"
