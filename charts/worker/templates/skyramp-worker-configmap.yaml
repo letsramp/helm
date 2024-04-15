@@ -10,4 +10,5 @@ data:
   config.yaml: |
     {{- include "worker.bootConfig" . | nindent 4 }}
   resources.yaml: "" 
+  target-config.yaml: ""
 immutable: false
