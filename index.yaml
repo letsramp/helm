@@ -77,6 +77,16 @@ entries:
     version: 0.1.0
   web-server:
   - apiVersion: v2
+    appVersion: v1.0.18
+    created: "2024-05-07T19:38:09.577618275Z"
+    description: Management plane dashboard for Skyramp
+    digest: 7da34ab8988bcee2427cdb50cf9f08a250dde5e66650e5d2015839b585e80b15
+    name: web-server
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/web-server-0.1.20/web-server-0.1.20.tgz
+    version: 0.1.20
+  - apiVersion: v2
     appVersion: v1.0.17
     created: "2024-05-07T18:00:29.67224633Z"
     description: Management plane dashboard for Skyramp
@@ -947,4 +957,4 @@ entries:
     urls:
     - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
     version: 0.1.4
-generated: "2024-05-07T18:00:29.672657929Z"
+generated: "2024-05-07T19:38:09.578117017Z"
