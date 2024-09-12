@@ -288,6 +288,16 @@ entries:
     version: 0.1.2
   worker:
   - apiVersion: v2
+    appVersion: v0.4.96
+    created: "2024-09-12T22:14:08.535370363Z"
+    description: A Helm chart for Skyramp worker
+    digest: 6f3ddaf9248bb947c5fd079141d179b124a6ca513445cbc856f6f5267645e204
+    name: worker
+    type: application
+    urls:
+    - https://github.com/letsramp/helm/releases/download/worker-0.1.87/worker-0.1.87.tgz
+    version: 0.1.87
+  - apiVersion: v2
     appVersion: v0.4.95
     created: "2024-08-30T21:37:42.046239675Z"
     description: A Helm chart for Skyramp worker
@@ -1117,4 +1127,4 @@ entries:
     urls:
     - https://github.com/letsramp/helm/releases/download/worker-0.1.4/worker-0.1.4.tgz
     version: 0.1.4
-generated: "2024-08-30T21:37:42.046520259Z"
+generated: "2024-09-12T22:14:08.535795056Z"
