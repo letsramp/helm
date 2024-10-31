@@ -1,0 +1,8 @@
+namespace := "skyramp"
+
+create-namespace:
+    kubectl create namespace {{namespace}} || echo "Namespace {{namespace}} already exists"
+
+
+install-opentsdb:
+    helm install -n {{ namespace }} opentsdb .

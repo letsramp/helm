@@ -67,6 +67,6 @@ ManagementPlaneConfig:
     database: "dashboarddb"
     testResultCollection: "testresults"
     mockCollection: "servicemocks"
-  prometheusConfig:
+  metricsConfig:
     enabled: true
-    pushGatewayUrl: http://prom-prometheus-pushgateway.skyramp:9091
+    pushGatewayUrl: http://opentsdb.skyramp:4242
