@@ -15,6 +15,9 @@ nameOverride: ""
 # This is required for various functionality, such as detailed k8s metrics fetching.
 rbac: false
 
+cleanup:
+  enabled: true
+
 serviceAccount:
   # Annotations to add to the service account
   annotations: {}

@@ -4,6 +4,8 @@ metadata:
   name: {{ include "worker.fullname" . }}
   labels:
     {{- include "worker.labels" . | nindent 4 }}
+  finalizers:
+    - skyramp.dev/cleanup-finalizer
 spec:
   selector:
     matchLabels:
@@ -40,6 +42,9 @@ spec:
             {{- toYaml .Values.securityContext | nindent 12 }}
           image: "{{ .Values.image.repository }}:{{ .Values.image.tag | default .Chart.AppVersion }}"
           imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DEPLOYMENT_NAME
+              value: {{ include "worker.fullname" . }}
           volumeMounts:
             - name: {{ .Chart.Name }}
               mountPath: {{ .Values.bootConfig.mountPath }}
