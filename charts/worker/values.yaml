@@ -11,9 +11,16 @@ image:
 imagePullSecrets: []
 nameOverride: ""
 
-# Whether higher level permissions should be requested for the Skyramp worker.
-# This is required for various functionality, such as detailed k8s metrics fetching.
-rbac: false
+# Whether to create custom RBAC resources for the Skyramp worker.
+# When false: uses built-in 'edit' ClusterRole (broad namespace permissions)
+# When true: creates custom RBAC with minimal required permissions
+rbac: true
+
+# Whether to create cluster-scoped RBAC resources (ClusterRole/ClusterRoleBinding).
+# Only applies when rbac: true.
+# When false: only namespace-scoped Role is created (no metrics collection)
+# When true: ClusterRole is created for node metrics access
+clusterScope: false
 
 cleanup:
   enabled: true
