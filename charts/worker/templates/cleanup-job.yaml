@@ -1,0 +1,29 @@
+{{- if .Values.cleanup.enabled -}}
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "worker.fullname" . }}-cleanup
+  labels:
+    {{- include "worker.labels" . | nindent 4 }}
+  annotations:
+    "helm.sh/hook": pre-delete
+    "helm.sh/hook-weight": "-5"
+    "helm.sh/hook-delete-policy": hook-succeeded,before-hook-creation
+spec:
+  template:
+    metadata:
+      name: {{ include "worker.fullname" . }}-cleanup
+    spec:
+      serviceAccountName: {{ include "worker.serviceAccountName" . }}
+      restartPolicy: Never
+      containers:
+      - name: cleanup
+        image: curlimages/curl:latest
+        command:
+        - /bin/sh
+        - -c
+        - |
+          echo "Running cleanup..."
+          curl -X POST http://{{ include "worker.fullname" . }}:{{ .Values.service.port }}/cleanup
+          echo "Cleanup completed"
+{{- end }}

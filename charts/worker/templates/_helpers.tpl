@@ -51,7 +51,7 @@ Create the name of the service account to use
 Create the name of the cluster role to use
 */}}
 {{- define "worker.clusterRoleName" -}}
-{{- if .Values.rbac }}
+{{- if and .Values.rbac .Values.clusterScope }}
 {{- printf "%s-%s" (include "worker.fullname" .) .Release.Namespace }}
 {{- end }}
 {{- end }}
